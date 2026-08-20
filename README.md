@@ -1,6 +1,6 @@
 # Meeting Audio Converter
 
-**GALA IT팀 | Version 0.1.2**
+**GALA IT팀 | Version 0.1.3**
 
 tl;dv에서 생성된 WebM 회의 녹음 파일을 M4A로 변환하는 Windows용 GUI 프로그램입니다.
 
@@ -44,6 +44,8 @@ AI 회의록 서비스 업로드
 - 변환 결과 폴더 바로 열기
 - FFmpeg 오류 및 파일 오류 처리
 - Windows GUI 제공
+- Windows EXE 형태로 패키징
+- EXE에 회사명, 제품명, 버전 정보 적용
 
 ---
 
@@ -97,9 +99,21 @@ FFmpeg 명령어를 직접 입력하지 않아도 되도록 Tkinter 기반 GUI�
 
 FFmpeg 미설치, 잘못된 파일 형식, 중복 파일, 변환 실패 등의 상황을 처리했습니다.
 
-### ⑤ Windows 배포 준비
+### ⑤ Windows EXE 패키징
 
-PyInstaller를 이용해 Python 개발환경이 없는 사용자도 실행할 수 있는 EXE 형태로 패키징할 수 있도록 구성했습니다.
+PyInstaller를 이용하여 Python 개발환경이 없는 사용자도 실행할 수 있는 Windows EXE 형태로 패키징했습니다.
+
+EXE 파일명은 `회의음성변환기.exe`로 설정했습니다.
+
+또한 Windows 파일 속성에 다음 정보를 표시하도록 구성했습니다.
+
+```text
+회사       : GALA IT팀
+제품 이름  : 회의 음성 파일 변환기
+파일 설명  : 회의 음성 WebM → M4A 변환 프로그램
+파일 버전  : 0.1.3
+제품 버전  : 0.1.3
+```
 
 ---
 
@@ -126,15 +140,25 @@ FFmpeg는 프로그램과 같은 폴더에 `ffmpeg.exe`를 두거나 시스템 P
 PyInstaller를 사용하여 Windows 실행파일을 생성할 수 있습니다.
 
 ```cmd
-python -m PyInstaller --onefile --noconsole --collect-all tkinterdnd2 meeting_audio_converter.py
+python -m PyInstaller --clean --onefile --noconsole --name "회의음성변환기" --icon "meeting_audio_converter.ico" --version-file "version_info.txt" --collect-all tkinterdnd2 meeting_audio_converter.py
 ```
 
 빌드 결과:
 
 ```text
 dist/
-└── meeting_audio_converter.exe
+└── 회의음성변환기.exe
 ```
+
+EXE 실행 시 FFmpeg가 필요하므로 현재 배포 방식은 다음과 같습니다.
+
+```text
+회의음성변환기_0.1.3/
+├── 회의음성변환기.exe
+└── ffmpeg.exe
+```
+
+두 파일을 같은 폴더에 두고 `회의음성변환기.exe`를 실행합니다.
 
 ※ 실제 배포 시 FFmpeg의 라이선스 및 재배포 조건을 확인합니다.
 
@@ -151,10 +175,13 @@ dist/
 - [x] 오류 처리
 - [x] GitHub 소스 관리
 - [x] 버전 관리
+- [x] Windows EXE 빌드
+- [x] EXE 아이콘 적용
+- [x] EXE 회사/제품/버전 정보 적용
+- [x] EXE + FFmpeg 실제 변환 테스트
 
 ### 예정
 
-- [ ] EXE 배포 테스트
 - [ ] 사내 사용자 테스트
 - [ ] 사용자 매뉴얼 작성
 - [ ] Version 1.0.0 정식 배포
@@ -168,6 +195,7 @@ dist/
 | 0.1.0 | 초기 기능 및 GUI 구현 |
 | 0.1.1 | UI Footer 수정 |
 | 0.1.2 | Footer 레이아웃 개선 및 버전 정보 표시 |
+| 0.1.3 | Windows EXE 빌드 설정, 아이콘 및 파일 버전 정보 추가 |
 
 ---
 
