@@ -1,12 +1,10 @@
 __pycache__/
 *.py[cod]
-*$py.class
+*.spec
 .venv/
 venv/
-env/
 build/
 dist/
-*.spec
 .vscode/
 .idea/
 .DS_Store
