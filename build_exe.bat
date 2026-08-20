@@ -1,0 +1,1 @@
+python -m PyInstaller --clean --onefile --noconsole --name "회의음성변환기" --icon "meeting_audio_converter.ico" --version-file "version_info.txt" --collect-all tkinterdnd2 meeting_audio_converter.py
