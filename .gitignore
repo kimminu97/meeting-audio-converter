@@ -1,25 +1,14 @@
-# Python
-__pycache__
-.py[cod]
-$py.class
-
-# Virtual environment
-.venv
-venv
-env
-
-# PyInstaller
-build
-dist
-.spec
-
-# IDE
-.vscode
-.idea
-
-# OS
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+build/
+dist/
+*.spec
+.vscode/
+.idea/
 .DS_Store
 Thumbs.db
-
-# FFmpeg
 ffmpeg.exe
